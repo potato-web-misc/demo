@@ -29,25 +29,23 @@ body {
     display: flex;
     flex-wrap: wrap;
     column-gap: 20px; /* 水平间距保持20px不变 */
-    row-gap: 10px;    /* 竖直间距减小为10px（原来的一半） */
+    row-gap: 10px;    /* 竖直间距减小为10px */
     /* 宽度计算：3个卡片+2个水平间距(20px×2) */
     width: calc( (100vw - 40px) / 3 * 3 + 40px ); /* 40px=2个水平间距总和 */
     max-width: 1200px;
     justify-content: center;
-    /* 垂直高度：2个卡片高度+1个竖直间距(10px) */
-    min-height: calc( 40vh * 2 + 10px );
     overflow-x: auto;
     scrollbar-width: thin;
     scrollbar-color: #ccc transparent;
 }
 
-/* 卡片样式：保持40%视口高度，适配间距 */
+/* 卡片样式：保持高度，适配图片 */
 .app-card {
     /* 宽度：容器均分3列，减去水平间距影响 */
     width: calc( (100% - 40px) / 3 ); /* 40px=2个水平间距总和 */
     height: 60vh;
-    min-height: 120px;
-    max-height: 250px;
+    min-height: 300px; /* 增加最小高度以适应图片 */
+    max-height: 400px;
     background-color: #f5f5f5;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -59,15 +57,36 @@ body {
     font-size: 1.1em;
     font-weight: 600;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 15px;
     text-align: center;
     word-break: keep-all;
+}
+
+/* 卡片内容容器：垂直排列图片和文字 */
+.app-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+/* 应用图片样式 */
+.app-image {
+    max-width: 100%;
+    max-height: 70%; /* 图片占卡片高度的70% */
+    object-fit: contain; /* 保持图片比例，不拉伸 */
+    margin-bottom: 15px;
+    border-radius: 4px;
 }
 
 /* 悬停交互反馈 */
 .app-card:hover {
     background-color: #eee;
     border-color: #bbb;
+    transform: translateY(-3px);
+    transition: all 0.3s ease;
 }
 
 /* 滚动条优化 */
@@ -77,4 +96,15 @@ body {
 .container::-webkit-scrollbar-thumb {
     background-color: #ccc;
     border-radius: 3px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .app-card {
+        min-height: 250px;
+    }
+    
+    .app-image {
+        max-height: 60%;
+    }
 }
