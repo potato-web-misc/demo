@@ -31,6 +31,8 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
+    /* 解决点击问题：让伪元素不接收鼠标事件 */
+    pointer-events: none;
     /* 使用 box-shadow 创建大量小星星 */
     box-shadow: 
         0 0 1px #fff,
@@ -64,6 +66,8 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
+    /* 解决点击问题：让伪元素不接收鼠标事件 */
+    pointer-events: none;
     /* 另一组 box-shadow，位置和大小稍有不同 */
     box-shadow: 
         15vw 15vh 1px #fff,
