@@ -103,14 +103,14 @@ body {
 }
 
 /* 应用卡片样式 */
+/* 桌面端 - 2排3列 */
 .app-card {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* PC端每行3个，flex-basis的计算方式 */
-    flex-basis: calc(33.333% - 20px); 
-    min-width: 250px; 
-    height: 180px;
+    flex-basis: calc(33.333% - 20px); /* 每行3个 */
+    min-width: unset; /* 取消最小宽度限制，保证每行3个 */
+    height: 200px; /* 可调，保证整体美观 */
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -120,6 +120,7 @@ body {
     color: #fff;
     transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
 }
+
 
 .app-card:hover {
     transform: translateY(-8px) scale(1.05);
