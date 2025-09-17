@@ -28,7 +28,7 @@ body {
 .container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* 关键：水平和竖直间距统一设为20px */
+    gap: 10px; /* 关键：水平和竖直间距统一设为20px */
     /* 宽度计算：3个卡片+2个水平间距(20px×2) */
     width: calc( (100vw - 40px) / 3 * 3 + 40px ); /* 40px=2个水平间距总和 */
     max-width: 1200px;
