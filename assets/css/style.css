@@ -11,21 +11,21 @@ body {
     margin-bottom: 30px;
 }
 
-/* 容器样式 - 关键是控制最大宽度让每行只能放2个 */
+/* 容器样式 - 控制宽度确保每行3个卡片 */
 .container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    /* 控制容器最大宽度，确保每行只能容纳2个卡片 */
-    max-width: 800px;
+    /* 容器最大宽度适配3个卡片并排 */
+    max-width: 1000px;
     margin: 0 auto; /* 容器居中 */
 }
 
-/* 卡片样式 - 确保每行2个 */
+/* 卡片样式 - 每行3个卡片 */
 .app-card {
-    /* 宽度计算：50%减去间距的一半 */
-    width: calc(50% - 10px);
-    height: 150px;
+    /* 宽度计算：100%除以3列，减去间距影响 */
+    width: calc(33.333% - 13.33px);
+    height: 180px;
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     display: flex;
@@ -42,9 +42,15 @@ body {
     background-color: #e0e0e0;
 }
 
-/* 确保在小屏幕上不会挤压 */
-@media (max-width: 600px) {
+/* 响应式调整 - 小屏幕适配 */
+@media (max-width: 768px) {
     .app-card {
-        width: 100%; /* 小屏幕上每行1个 */
+        width: calc(50% - 10px); /* 中等屏幕每行2个 */
+    }
+}
+
+@media (max-width: 480px) {
+    .app-card {
+        width: 100%; /* 小屏幕每行1个 */
     }
 }
