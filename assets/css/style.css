@@ -19,7 +19,7 @@ body {
 /* 定义星星的闪烁动画 */
 @keyframes twinkling {
     0% { opacity: 0; }
-    50% { opacity: 1; }
+    50% { opacity: 1; } /* 确保中间态完全可见 */
     100% { opacity: 0; }
 }
 
@@ -31,31 +31,51 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    /* 解决点击问题：让伪元素不接收鼠标事件 */
-    pointer-events: none;
+    pointer-events: none; /* 解决点击问题：让伪元素不接收鼠标事件 */
     /* 使用 box-shadow 创建大量小星星 */
     box-shadow: 
-        0 0 1px #fff,
-        25vw 10vh 1px #fff,
-        50vw 20vh 1px #fff,
-        75vw 30vh 1px #fff,
-        10vw 40vh 1px #fff,
-        35vw 50vh 1px #fff,
-        60vw 60vh 1px #fff,
-        85vw 70vh 1px #fff,
-        20vw 80vh 1px #fff,
-        45vw 90vh 1px #fff,
-        70vw 5vh 1px #fff,
-        95vw 15vh 1px #fff,
-        5vw 25vh 1px #fff,
-        30vw 35vh 1px #fff,
-        55vw 45vh 1px #fff,
-        80vw 55vh 1px #fff,
-        15vw 65vh 1px #fff,
-        40vw 75vh 1px #fff,
-        65vw 85vh 1px #fff,
-        90vw 95vh 1px #fff;
-    animation: twinkling 10s infinite; /* 应用闪烁动画，无限循环 */
+        10vw 20vh 0 0 #fff, 
+        80vw 50vh 0 0 #fff,
+        30vw 70vh 0 0 #fff,
+        50vw 10vh 0 0 #fff,
+        70vw 90vh 0 0 #fff,
+        20vw 40vh 0 0 #fff,
+        90vw 30vh 0 0 #fff,
+        40vw 80vh 0 0 #fff,
+        60vw 60vh 0 0 #fff,
+        5vw 5vh 0 0 #fff,
+        95vw 15vh 0 0 #fff,
+        15vw 95vh 0 0 #fff,
+        85vw 25vh 0 0 #fff,
+        45vw 55vh 0 0 #fff,
+        65vw 5vh 0 0 #fff,
+        25vw 85vh 0 0 #fff,
+        75vw 10vh 0 0 #fff,
+        35vw 35vh 0 0 #fff,
+        55vw 75vh 0 0 #fff,
+        5vw 60vh 0 0 #fff,
+        80vw 05vh 0 0 #fff,
+        10vw 75vh 0 0 #fff,
+        40vw 15vh 0 0 #fff,
+        60vw 45vh 0 0 #fff,
+        90vw 70vh 0 0 #fff,
+        20vw 55vh 0 0 #fff,
+        70vw 20vh 0 0 #fff,
+        30vw 90vh 0 0 #fff,
+        50vw 30vh 0 0 #fff,
+        5vw 80vh 0 0 #fff,
+        95vw 50vh 0 0 #fff,
+        15vw 10vh 0 0 #fff,
+        85vw 60vh 0 0 #fff,
+        45vw 20vh 0 0 #fff,
+        65vw 80vh 0 0 #fff,
+        25vw 05vh 0 0 #fff,
+        75vw 75vh 0 0 #fff,
+        35vw 45vh 0 0 #fff;
+    /* 调整动画时长，使其更明显 */
+    animation: twinkling 10s infinite; 
+    /* 增加额外的发光效果 */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 /* 创建第二层星星（稍大，错开动画） */
@@ -66,34 +86,54 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    /* 解决点击问题：让伪元素不接收鼠标事件 */
-    pointer-events: none;
+    pointer-events: none; /* 解决点击问题：让伪元素不接收鼠标事件 */
     /* 另一组 box-shadow，位置和大小稍有不同 */
     box-shadow: 
-        15vw 15vh 1px #fff,
-        40vw 25vh 1px #fff,
-        65vw 35vh 1px #fff,
-        90vw 45vh 1px #fff,
-        5vw 55vh 1px #fff,
-        30vw 65vh 1px #fff,
-        55vw 75vh 1px #fff,
-        80vw 85vh 1px #fff,
-        25vw 95vh 1px #fff,
-        50vw 5vh 1px #fff,
-        75vw 15vh 1px #fff,
-        10vw 25vh 1px #fff,
-        35vw 35vh 1px #fff,
-        60vw 45vh 1px #fff,
-        85vw 55vh 1px #fff,
-        20vw 65vh 1px #fff,
-        45vw 75vh 1px #fff,
-        70vw 85vh 1px #fff,
-        95vw 95vh 1px #fff;
-    animation: twinkling 12s infinite 2s; /* 不同的动画时长和延迟，制造错落感 */
+        5vw 30vh 0 0 #fff, 
+        75vw 80vh 0 0 #fff,
+        25vw 10vh 0 0 #fff,
+        45vw 90vh 0 0 #fff,
+        65vw 20vh 0 0 #fff,
+        15vw 60vh 0 0 #fff,
+        85vw 40vh 0 0 #fff,
+        35vw 50vh 0 0 #fff,
+        55vw 05vh 0 0 #fff,
+        10vw 70vh 0 0 #fff,
+        90vw 10vh 0 0 #fff,
+        30vw 95vh 0 0 #fff,
+        70vw 60vh 0 0 #fff,
+        05vw 25vh 0 0 #fff,
+        80vw 70vh 0 0 #fff,
+        20vw 35vh 0 0 #fff,
+        40vw 85vh 0 0 #fff,
+        60vw 15vh 0 0 #fff,
+        95vw 40vh 0 0 #fff,
+        50vw 65vh 0 0 #fff,
+        10vw 05vh 0 0 #fff,
+        70vw 50vh 0 0 #fff,
+        20vw 25vh 0 0 #fff,
+        80vw 95vh 0 0 #fff,
+        40vw 60vh 0 0 #fff,
+        60vw 30vh 0 0 #fff,
+        90vw 80vh 0 0 #fff,
+        15vw 40vh 0 0 #fff,
+        35vw 10vh 0 0 #fff,
+        55vw 70vh 0 0 #fff,
+        5vw 90vh 0 0 #fff,
+        95vw 05vh 0 0 #fff,
+        25vw 50vh 0 0 #fff,
+        85vw 30vh 0 0 #fff,
+        45vw 95vh 0 0 #fff;
+    /* 不同的动画时长和延迟，制造错落感 */
+    animation: twinkling 12s infinite 2s; 
+    /* 增加额外的发光效果 */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 .header {
     margin: 40px 0 60px;
+    z-index: 10; /* 确保标题在星星之上 */
+    position: relative; /* 确保 z-index 生效 */
 }
 
 .header h1 {
@@ -111,6 +151,8 @@ body::after {
     gap: 30px; /* 增加项目间距 */
     max-width: 1000px; /* 限制容器最大宽度 */
     width: 90%;
+    z-index: 10; /* 确保容器在星星之上 */
+    position: relative; /* 确保 z-index 生效 */
 }
 
 /* 应用卡片样式 */
