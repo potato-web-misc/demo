@@ -144,16 +144,15 @@ body {
     }
     
     .container {
-        /* 在手机端依旧保持水平排列，不修改 flex-direction */
-        /* flex-direction: column;  这一行已移除 */
-        align-items: center; 
+        /* 在手机端同样保持 flexbox 布局和间距 */
+        justify-content: center;
         gap: 20px;
     }
 
     .app-card {
-        /* 在手机端每行显示3个，计算宽度 */
-        flex-basis: calc(33.333% - 13.33px); /* 3个卡片，2个间距(gap) */
-        min-width: unset; 
+        /* 手机端也保持每行 3 个卡片 */
+        flex-basis: calc(33.333% - 13.33px);
+        min-width: unset; /* 取消最小宽度限制，让其自适应 */
         height: 120px; /* 调整高度以适应小屏幕 */
     }
 }
