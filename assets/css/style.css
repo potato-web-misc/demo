@@ -8,7 +8,7 @@ body {
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
-    background-color: #f8f8f8; /* 页面背景色，避免卡片外空白突兀 */
+    background-color: #f8f8f8;
 }
 
 /* 标题样式：固定顶部 */
@@ -25,76 +25,65 @@ body {
     color: #333;
 }
 
-/* 容器核心样式：水平20px，竖直10px间距，2排3列 */
+/* 容器核心样式：确保每行3个卡片 */
 .container {
     display: flex;
     flex-wrap: wrap;
-    column-gap: 20px; /* 水平间距不变 */
-    row-gap: 10px;    /* 竖直间距减半 */
-    /* 宽度计算：3个卡片+2个水平间距，确保每行3个 */
-    width: calc( (100vw - 40px) / 3 * 3 + 40px ); /* 40px=body左右padding总和 */
+    column-gap: 20px; /* 水平间距 */
+    row-gap: 10px;    /* 竖直间距 */
+    width: 100%;
     max-width: 1200px;
-    justify-content: center;
-    overflow-x: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #ccc transparent;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
-/* 核心：应用卡片（背景图全屏覆盖） */
+/* 应用卡片样式：确保每行3个 */
 .app-card {
-    /* 宽度：容器均分3列，减去水平间距影响 */
-    width: calc( (100% - 40px) / 3 ); /* 40px=2个水平间距总和 */
-    height: 60vh; /* 保持你设置的高度 */
-    min-height: 300px; /* 小屏幕最小高度，避免图片压缩过狠 */
-    max-height: 400px; /* 大屏最大高度，避免图片拉伸过度 */
-    /* 背景图全屏覆盖关键属性 */
-    background-size: cover;    /* 图片拉伸填充整个卡片 */
-    background-position: center; /* 图片居中显示，避免关键部分被裁剪 */
-    background-repeat: no-repeat; /* 禁止图片重复 */
-    /* 文字清晰显示：加半透明遮罩 */
-    position: relative;
+    /* 关键：计算宽度确保每行3个卡片 */
+    width: calc(33.333% - 13.33px);
+    min-width: 200px; /* 最小宽度，确保不会过窄 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f5f5f5;
     border: 1px solid #ddd;
     border-radius: 8px;
-    text-decoration: none; /* 去除链接下划线 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; /* 防止图片超出卡片圆角 */
+    text-decoration: none;
+    color: #333;
+    padding: 15px;
+    box-sizing: border-box;
+    height: 60vh;
+    min-height: 300px;
+    max-height: 400px;
 }
 
-/* 半透明遮罩：在背景图上叠加，确保文字清晰（可选但推荐） */
-.app-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
+/* 应用图片：确保完整显示 */
+.app-image {
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3); /* 黑色半透明遮罩，可调整透明度 */
-    z-index: 1; /* 遮罩在背景图之上，文字之下 */
-}
-
-/* 应用标题：在遮罩之上，确保清晰可见 */
-.app-card h2 {
-    position: relative;
-    z-index: 2; /* 文字层级最高 */
-    margin: 0;
-    font-size: 1.2em;
-    color: #fff; /* 白色文字，与遮罩对比强烈 */
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* 文字加阴影，进一步增强可读性 */
+    height: 70%; /* 图片占卡片大部分高度 */
+    object-fit: contain; /* 关键：保持图片完整，不变形，不裁剪 */
+    margin-bottom: 15px;
+    background-color: #fff; /* 图片周围白色背景，突出图片 */
     padding: 10px;
-    text-align: center;
+    box-sizing: border-box;
 }
 
-/* 悬停效果：增强交互感 */
+/* 应用标题 */
+.app-card h2 {
+    margin: 0;
+    font-size: 1.1em;
+    text-align: center;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+    width: 100%;
+}
+
+/* 悬停交互效果 */
 .app-card:hover {
-    border-color: #999;
+    background-color: #eee;
+    border-color: #bbb;
     transform: translateY(-3px);
     transition: all 0.3s ease;
-    /* 悬停时加深遮罩，突出文字 */
-}
-.app-card:hover::before {
-    background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* 滚动条优化 */
@@ -106,12 +95,23 @@ body {
     border-radius: 3px;
 }
 
-/* 小屏幕响应式：确保布局不混乱 */
-@media (max-width: 768px) {
-    .app-card {
-        min-height: 250px;
-    }
-    .app-card h2 {
-        font-size: 1.1em;
+/* 确保在各种屏幕尺寸下都保持3列布局 */
+@media (max-width: 1200px) {
+    .container {
+        padding: 0 10px;
     }
 }
+
+@media (max-width: 900px) {
+    .app-card {
+        min-width: 160px;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-card {
+        min-width: 140px;
+        font-size: 0.9em;
+    }
+}
+    
