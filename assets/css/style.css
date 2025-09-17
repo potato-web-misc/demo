@@ -15,6 +15,100 @@ body {
     justify-content: center;
     align-items: center;
 }
+/* 通用基础样式 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* 创建星空背景 */
+    background: #0d0d26; /* 深蓝色作为基础背景色 */
+    color: #e0e0e0;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* 必须给 body 设置定位，让伪元素基于它定位 */
+    overflow: hidden; /* 防止星星超出页面范围时出现滚动条 */
+}
+
+/* 标题和应用卡片样式保持不变 */
+/* ...（这里省略了上一个回答中的 .header, .container, .app-card 样式，请保留） */
+
+/* --- 星光效果 --- */
+
+/* 定义星星的闪烁动画 */
+@keyframes twinkling {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* 创建第一层星星（较小） */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 使用 box-shadow 创建大量小星星 */
+    box-shadow: 
+        0 0 1px #fff,
+        25vw 10vh 1px #fff,
+        50vw 20vh 1px #fff,
+        75vw 30vh 1px #fff,
+        10vw 40vh 1px #fff,
+        35vw 50vh 1px #fff,
+        60vw 60vh 1px #fff,
+        85vw 70vh 1px #fff,
+        20vw 80vh 1px #fff,
+        45vw 90vh 1px #fff,
+        70vw 5vh 1px #fff,
+        95vw 15vh 1px #fff,
+        5vw 25vh 1px #fff,
+        30vw 35vh 1px #fff,
+        55vw 45vh 1px #fff,
+        80vw 55vh 1px #fff,
+        15vw 65vh 1px #fff,
+        40vw 75vh 1px #fff,
+        65vw 85vh 1px #fff,
+        90vw 95vh 1px #fff;
+    animation: twinkling 10s infinite; /* 应用闪烁动画，无限循环 */
+}
+
+/* 创建第二层星星（稍大，错开动画） */
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 另一组 box-shadow，位置和大小稍有不同 */
+    box-shadow: 
+        15vw 15vh 1px #fff,
+        40vw 25vh 1px #fff,
+        65vw 35vh 1px #fff,
+        90vw 45vh 1px #fff,
+        5vw 55vh 1px #fff,
+        30vw 65vh 1px #fff,
+        55vw 75vh 1px #fff,
+        80vw 85vh 1px #fff,
+        25vw 95vh 1px #fff,
+        50vw 5vh 1px #fff,
+        75vw 15vh 1px #fff,
+        10vw 25vh 1px #fff,
+        35vw 35vh 1px #fff,
+        60vw 45vh 1px #fff,
+        85vw 55vh 1px #fff,
+        20vw 65vh 1px #fff,
+        45vw 75vh 1px #fff,
+        70vw 85vh 1px #fff,
+        95vw 95vh 1px #fff;
+    animation: twinkling 12s infinite 2s; /* 不同的动画时长和延迟，制造错落感 */
+}
 
 .header {
     margin: 40px 0 60px;
