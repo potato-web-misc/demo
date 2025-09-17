@@ -16,11 +16,6 @@ body {
     overflow: hidden; /* 防止星星超出页面范围时出现滚动条 */
 }
 
-/* 标题和应用卡片样式保持不变 */
-/* ...（这里省略了上一个回答中的 .header, .container, .app-card 样式，请保留） */
-
-/* --- 星光效果 --- */
-
 /* 定义星星的闪烁动画 */
 @keyframes twinkling {
     0% { opacity: 0; }
@@ -101,7 +96,7 @@ body::after {
     font-size: 2.5em;
     color: #fff;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    letter-spacing: 2px; /* 增加文字间距 */
+    letter-spacing: 2px;
 }
 
 /* Flexbox 布局容器 */
