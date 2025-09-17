@@ -107,8 +107,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* PC端和手机端都使用每行2个，所以这里统一设置 */
-    flex-basis: calc(50% - 15px); 
+    /* PC端每行3个，flex-basis的计算方式 */
+    flex-basis: calc(33.333% - 20px); 
     min-width: 250px; 
     height: 180px;
     background-color: rgba(255, 255, 255, 0.1);
@@ -142,15 +142,16 @@ body {
     .header h1 {
         font-size: 2em;
     }
-
-    /* .container 和 .app-card 样式在大屏幕和小屏幕上可以保持一致 */
+    
     .container {
-        gap: 20px; /* 调整手机端间距 */
+        justify-content: center;
+        gap: 10px; /* 缩小间距，让卡片有更多空间 */
     }
 
     .app-card {
-        flex-basis: calc(50% - 10px); /* 手机端每行2个，重新计算宽度以适应更小的间距 */
+        /* 手机端也保持每行 3 个卡片 */
+        flex-basis: calc(33.333% - 6.66px); /* 重新计算宽度以适应更小的间距 */
         min-width: unset; /* 取消最小宽度限制，让其自适应 */
-        height: 150px; /* 调整高度以适应小屏幕 */
+        height: 100px; /* 进一步调整高度以适应小屏幕 */
     }
 }
