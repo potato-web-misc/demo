@@ -1,166 +1,45 @@
-/* 通用基础样式 */
+/* 页面整体样式，使内容居中 */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    /* 创建星空背景 */
-    background: #0d0d26; /* 深蓝色作为基础背景色 */
-    color: #e0e0e0;
-    text-align: center;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    position: relative; /* 必须给 body 设置定位，让伪元素基于它定位 */
-    overflow: hidden; /* 防止星星超出页面范围时出现滚动条 */
+    min-height: 100vh;
 }
 
-/* 定义星星的闪烁动画 */
-@keyframes twinkling {
-    0% { opacity: 0; transform: scale(0.5); }
-    50% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0.5); }
-}
-
-/* 创建第一层星星（小点，密集） */
-.stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(circle, #fff 1px, transparent 1px),
-                      radial-gradient(circle, #fff 1px, transparent 1px),
-                      radial-gradient(circle, #fff 1px, transparent 1px);
-    background-size: 50px 50px, 70px 70px, 90px 90px;
-    background-position: 0 0, 20px 20px, 40px 40px;
-    opacity: 0.5;
-    animation: twinkling 20s infinite;
-    pointer-events: none;
-}
-
-/* 简单星光实现 */
-.star-1 {
-    position: absolute;
-    top: 10%;
-    left: 20%;
-    width: 2px;
-    height: 2px;
-    background-color: #fff;
-    box-shadow: 0 0 10px #fff;
-    animation: twinkling 5s infinite;
-    pointer-events: none;
-}
-
-.star-2 {
-    position: absolute;
-    top: 50%;
-    left: 80%;
-    width: 3px;
-    height: 3px;
-    background-color: #fff;
-    box-shadow: 0 0 10px #fff;
-    animation: twinkling 7s infinite 1s;
-    pointer-events: none;
-}
-
-.star-3 {
-    position: absolute;
-    top: 90%;
-    left: 40%;
-    width: 1.5px;
-    height: 1.5px;
-    background-color: #fff;
-    box-shadow: 0 0 10px #fff;
-    animation: twinkling 6s infinite 2s;
-    pointer-events: none;
-}
-
+/* 标题样式 */
 .header {
-    margin: 40px 0 60px;
-    z-index: 10;
-    position: relative;
+    margin: 20px 0;
 }
 
-.header h1 {
-    font-size: 2.5em;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    letter-spacing: 2px;
-}
-
-/* Flexbox 布局容器 */
+/* 应用卡片容器，使用 flex 布局实现 2 排 3 列 */
 .container {
     display: flex;
-    flex-wrap: wrap; /* 允许项目换行 */
-    justify-content: center; /* 水平居中 */
-    gap: 30px; /* 增加项目间距 */
-    max-width: 1000px; /* 限制容器最大宽度 */
-    width: 90%;
-    z-index: 10;
-    position: relative;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 80%;
+    max-width: 800px;
 }
 
-/* 应用卡片样式 - 桌面端2排3列 */
+/* 应用卡片样式 */
 .app-card {
+    /* 计算每个卡片宽度，实现 3 列布局 */
+    flex-basis: calc(33.333% - 13.33px);
+    height: 150px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* 每行3个卡片，计算方式：100%宽度除以3，减去间距的影响 */
-    flex-basis: calc(33.333% - 20px); 
-    min-width: 150px; /* 确保在小屏幕上也有合适的最小宽度 */
-    height: 200px; /* 调整高度适合2排布局 */
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     text-decoration: none;
-    color: #fff;
-    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    color: #333;
+    font-weight: bold;
 }
 
+/* 鼠标悬停效果 */
 .app-card:hover {
-    transform: translateY(-8px) scale(1.05);
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+    background-color: #e0e0e0;
 }
-
-.app-card h2 {
-    font-size: 1.5em;
-    margin: 0;
-    text-shadow: 0 0 5px #000;
-}
-
-/* 媒体查询 - 平板设备 */
-@media (max-width: 900px) {
-    .app-card {
-        /* 平板上每行2个卡片 */
-        flex-basis: calc(50% - 15px);
-    }
-}
-
-/* 媒体查询 - 手机端 */
-@media (max-width: 768px) {
-    .header {
-        margin: 20px 0 40px;
-    }
-
-    .header h1 {
-        font-size: 2em;
-    }
-    
-    .container {
-        justify-content: center;
-        gap: 20px;
-    }
-
-    .app-card {
-        /* 手机端每行1个卡片 */
-        flex-basis: 100%;
-        max-width: 300px;
-        height: 120px;
-    }
-}
-    
