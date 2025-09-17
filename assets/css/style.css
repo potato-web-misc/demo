@@ -1,45 +1,44 @@
-/* 页面整体样式，使内容居中 */
+/* 基础样式重置 */
 body {
     margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 20px;
     min-height: 100vh;
+    box-sizing: border-box;
 }
 
 /* 标题样式 */
 .header {
-    margin: 20px 0;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-/* 应用卡片容器，使用 flex 布局实现 2 排 3 列 */
+/* 容器使用flex布局实现3排2列 */
 .container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    width: 80%;
-    max-width: 800px;
+    flex-wrap: wrap; /* 允许换行 */
+    justify-content: center; /* 水平居中 */
+    gap: 20px; /* 卡片之间的间距 */
+    max-width: 800px; /* 限制最大宽度 */
+    margin: 0 auto; /* 容器居中 */
 }
 
-/* 应用卡片样式 */
+/* 应用卡片样式 - 2列布局 */
 .app-card {
-    /* 计算每个卡片宽度，实现 3 列布局 */
-    flex-basis: calc(33.333% - 13.33px);
-    height: 150px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    /* 计算宽度：100%除以2列，减去间距的一半 */
+    flex-basis: calc(50% - 10px);
+    height: 150px; /* 固定高度 */
+    background-color: #eee; /* 简单背景色 */
+    border: 1px solid #ccc; /* 边框 */
     display: flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
+    text-decoration: none; /* 去除链接下划线 */
+    color: #333; /* 文字颜色 */
+    font-size: 1.2em;
 }
 
-/* 鼠标悬停效果 */
+/* 悬停效果（保留基本交互反馈） */
 .app-card:hover {
-    background-color: #e0e0e0;
+    background-color: #ddd;
 }
+    
