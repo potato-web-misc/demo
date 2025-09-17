@@ -18,122 +18,69 @@ body {
 
 /* 定义星星的闪烁动画 */
 @keyframes twinkling {
-    0% { opacity: 0; }
-    50% { opacity: 1; } /* 确保中间态完全可见 */
-    100% { opacity: 0; }
+    0% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.5); }
 }
 
-/* 创建第一层星星（较小） */
-body::before {
-    content: '';
+/* 创建第一层星星（小点，密集） */
+.stars {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* 解决点击问题：让伪元素不接收鼠标事件 */
-    /* 使用 box-shadow 创建大量小星星 */
-    box-shadow: 
-        10vw 20vh 0 0 #fff, 
-        80vw 50vh 0 0 #fff,
-        30vw 70vh 0 0 #fff,
-        50vw 10vh 0 0 #fff,
-        70vw 90vh 0 0 #fff,
-        20vw 40vh 0 0 #fff,
-        90vw 30vh 0 0 #fff,
-        40vw 80vh 0 0 #fff,
-        60vw 60vh 0 0 #fff,
-        5vw 5vh 0 0 #fff,
-        95vw 15vh 0 0 #fff,
-        15vw 95vh 0 0 #fff,
-        85vw 25vh 0 0 #fff,
-        45vw 55vh 0 0 #fff,
-        65vw 5vh 0 0 #fff,
-        25vw 85vh 0 0 #fff,
-        75vw 10vh 0 0 #fff,
-        35vw 35vh 0 0 #fff,
-        55vw 75vh 0 0 #fff,
-        5vw 60vh 0 0 #fff,
-        80vw 05vh 0 0 #fff,
-        10vw 75vh 0 0 #fff,
-        40vw 15vh 0 0 #fff,
-        60vw 45vh 0 0 #fff,
-        90vw 70vh 0 0 #fff,
-        20vw 55vh 0 0 #fff,
-        70vw 20vh 0 0 #fff,
-        30vw 90vh 0 0 #fff,
-        50vw 30vh 0 0 #fff,
-        5vw 80vh 0 0 #fff,
-        95vw 50vh 0 0 #fff,
-        15vw 10vh 0 0 #fff,
-        85vw 60vh 0 0 #fff,
-        45vw 20vh 0 0 #fff,
-        65vw 80vh 0 0 #fff,
-        25vw 05vh 0 0 #fff,
-        75vw 75vh 0 0 #fff,
-        35vw 45vh 0 0 #fff;
-    /* 调整动画时长，使其更明显 */
-    animation: twinkling 10s infinite; 
-    /* 增加额外的发光效果 */
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    background-image: radial-gradient(circle, #fff 1px, transparent 1px),
+                      radial-gradient(circle, #fff 1px, transparent 1px),
+                      radial-gradient(circle, #fff 1px, transparent 1px);
+    background-size: 50px 50px, 70px 70px, 90px 90px;
+    background-position: 0 0, 20px 20px, 40px 40px;
+    opacity: 0.5;
+    animation: twinkling 20s infinite;
+    pointer-events: none;
 }
 
-/* 创建第二层星星（稍大，错开动画） */
-body::after {
-    content: '';
+/* 这是一个更简单的星光实现，如果你不需要大量星星，可以只保留这部分 */
+.star-1 {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* 解决点击问题：让伪元素不接收鼠标事件 */
-    /* 另一组 box-shadow，位置和大小稍有不同 */
-    box-shadow: 
-        5vw 30vh 0 0 #fff, 
-        75vw 80vh 0 0 #fff,
-        25vw 10vh 0 0 #fff,
-        45vw 90vh 0 0 #fff,
-        65vw 20vh 0 0 #fff,
-        15vw 60vh 0 0 #fff,
-        85vw 40vh 0 0 #fff,
-        35vw 50vh 0 0 #fff,
-        55vw 05vh 0 0 #fff,
-        10vw 70vh 0 0 #fff,
-        90vw 10vh 0 0 #fff,
-        30vw 95vh 0 0 #fff,
-        70vw 60vh 0 0 #fff,
-        05vw 25vh 0 0 #fff,
-        80vw 70vh 0 0 #fff,
-        20vw 35vh 0 0 #fff,
-        40vw 85vh 0 0 #fff,
-        60vw 15vh 0 0 #fff,
-        95vw 40vh 0 0 #fff,
-        50vw 65vh 0 0 #fff,
-        10vw 05vh 0 0 #fff,
-        70vw 50vh 0 0 #fff,
-        20vw 25vh 0 0 #fff,
-        80vw 95vh 0 0 #fff,
-        40vw 60vh 0 0 #fff,
-        60vw 30vh 0 0 #fff,
-        90vw 80vh 0 0 #fff,
-        15vw 40vh 0 0 #fff,
-        35vw 10vh 0 0 #fff,
-        55vw 70vh 0 0 #fff,
-        5vw 90vh 0 0 #fff,
-        95vw 05vh 0 0 #fff,
-        25vw 50vh 0 0 #fff,
-        85vw 30vh 0 0 #fff,
-        45vw 95vh 0 0 #fff;
-    /* 不同的动画时长和延迟，制造错落感 */
-    animation: twinkling 12s infinite 2s; 
-    /* 增加额外的发光效果 */
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    top: 10%;
+    left: 20%;
+    width: 2px;
+    height: 2px;
+    background-color: #fff;
+    box-shadow: 0 0 10px #fff;
+    animation: twinkling 5s infinite;
+    pointer-events: none;
+}
+
+.star-2 {
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    width: 3px;
+    height: 3px;
+    background-color: #fff;
+    box-shadow: 0 0 10px #fff;
+    animation: twinkling 7s infinite 1s;
+    pointer-events: none;
+}
+
+.star-3 {
+    position: absolute;
+    top: 90%;
+    left: 40%;
+    width: 1.5px;
+    height: 1.5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px #fff;
+    animation: twinkling 6s infinite 2s;
+    pointer-events: none;
 }
 
 .header {
     margin: 40px 0 60px;
-    z-index: 10; /* 确保标题在星星之上 */
-    position: relative; /* 确保 z-index 生效 */
+    z-index: 10;
+    position: relative;
 }
 
 .header h1 {
@@ -146,13 +93,13 @@ body::after {
 /* Flexbox 布局容器 */
 .container {
     display: flex;
-    flex-wrap: wrap; /* 允许项目换行 */
-    justify-content: center; /* 水平居中 */
-    gap: 30px; /* 增加项目间距 */
-    max-width: 1000px; /* 限制容器最大宽度 */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1000px;
     width: 90%;
-    z-index: 10; /* 确保容器在星星之上 */
-    position: relative; /* 确保 z-index 生效 */
+    z-index: 10;
+    position: relative;
 }
 
 /* 应用卡片样式 */
@@ -160,11 +107,11 @@ body::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-basis: calc(33.333% - 20px); /* 让卡片在大屏幕上每行显示三个 */
-    min-width: 250px; /* 确保每个卡片有最小宽度 */
+    flex-basis: calc(33.333% - 20px);
+    min-width: 250px;
     height: 180px;
-    background-color: rgba(255, 255, 255, 0.1); /* 半透明背景 */
-    backdrop-filter: blur(5px); /* 毛玻璃效果 */
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
@@ -174,7 +121,7 @@ body::after {
 }
 
 .app-card:hover {
-    transform: translateY(-8px) scale(1.05); /* 提升并放大效果 */
+    transform: translateY(-8px) scale(1.05);
     background-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
 }
@@ -196,14 +143,14 @@ body::after {
     }
     
     .container {
-        flex-direction: column; /* 手机端改为垂直排列 */
-        align-items: center; /* 确保卡片居中 */
+        flex-direction: column;
+        align-items: center;
         gap: 20px;
     }
 
     .app-card {
-        flex-basis: 90%; /* 手机端卡片宽度占满大部分空间 */
-        min-width: unset; /* 取消最小宽度限制 */
+        flex-basis: 90%;
+        min-width: unset;
         height: 150px;
     }
 }
