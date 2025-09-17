@@ -1,0 +1,69 @@
+/* 通用基础样式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+.header {
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 2em;
+    color: #333;
+}
+
+/* Flexbox 布局容器 */
+.container {
+    display: flex;
+    flex-wrap: wrap; /* 允许项目换行 */
+    justify-content: center; /* 水平居中 */
+    gap: 20px; /* 项目间距 */
+    padding: 0 10px;
+}
+
+/* 应用卡片样式 */
+.app-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px; /* 默认宽度 */
+    height: 150px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none; /* 去除下划线 */
+    color: #555;
+    transition: transform 0.2s, box-shadow 0.2s; /* 鼠标悬停动画 */
+}
+
+.app-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.app-card h2 {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+/* 媒体查询 - 手机端 */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.5em;
+    }
+    
+    .app-card {
+        width: 100%; /* 手机端卡片宽度占满一行 */
+        height: 120px;
+    }
+    
+    .container {
+        flex-direction: column; /* 手机端改为垂直排列 */
+        gap: 15px;
+    }
+}
