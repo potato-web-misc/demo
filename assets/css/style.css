@@ -24,17 +24,18 @@ body {
     color: #333;
 }
 
-/* 容器核心样式：水平和竖直间距完全一致 */
+/* 容器核心样式：水平间距不变，竖直间距减半 */
 .container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* 关键：水平和竖直间距统一设为20px */
+    column-gap: 20px; /* 水平间距保持20px不变 */
+    row-gap: 10px;    /* 竖直间距减小为10px（原来的一半） */
     /* 宽度计算：3个卡片+2个水平间距(20px×2) */
     width: calc( (100vw - 40px) / 3 * 3 + 40px ); /* 40px=2个水平间距总和 */
     max-width: 1200px;
     justify-content: center;
-    /* 垂直高度：2个卡片高度+1个竖直间距(20px) */
-    min-height: calc( 40vh * 2 + 20px );
+    /* 垂直高度：2个卡片高度+1个竖直间距(10px) */
+    min-height: calc( 40vh * 2 + 10px );
     overflow-x: auto;
     scrollbar-width: thin;
     scrollbar-color: #ccc transparent;
