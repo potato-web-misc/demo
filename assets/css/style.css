@@ -45,7 +45,7 @@ body {
 .app-card {
     /* 宽度：容器均分3列，减去水平间距影响 */
     width: calc( (100% - 40px) / 3 ); /* 40px=2个水平间距总和 */
-    height: 40vh;
+    height: 20vh;
     min-height: 120px;
     max-height: 250px;
     background-color: #f5f5f5;
