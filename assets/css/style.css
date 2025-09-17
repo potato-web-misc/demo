@@ -52,7 +52,7 @@ body {
     z-index: 10;
 }
 
-/* 应用卡片样式：确保每行3个 */
+/* 应用卡片样式：半透明背景，确保每行3个 */
 .app-card {
     /* 关键：计算宽度确保每行3个卡片 */
     width: calc(33.333% - 13.33px);
@@ -60,8 +60,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.6); /* 应用框半透明（0.6为透明度值） */
+    border: 1px solid rgba(255, 255, 255, 0.8); /* 边框也稍透明 */
     border-radius: 8px;
     text-decoration: none;
     color: #333;
@@ -73,30 +73,32 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* 应用图片：确保完整显示 */
+/* 应用图片：确保完全不透明 */
 .app-image {
     width: 100%;
     height: 70%; /* 图片占卡片大部分高度 */
     object-fit: contain; /* 保持图片完整，不变形，不裁剪 */
     margin-bottom: 15px;
-    background-color: #fff;
+    background-color: #fff; /* 图片背景完全不透明 */
     padding: 10px;
     box-sizing: border-box;
+    border: 1px solid #ddd; /* 给图片加边框，与半透明卡片区分 */
 }
 
-/* 应用标题 */
+/* 应用标题：文字放大 */
 .app-card h2 {
     margin: 0;
-    font-size: 1.1em;
+    font-size: 1.5em; /* 文字放大（比原来的1.1em大） */
     text-align: center;
     padding-top: 10px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid rgba(238, 238, 238, 0.8);
     width: 100%;
+    font-weight: 700; /* 加粗文字，更醒目 */
 }
 
 /* 悬停交互效果 */
 .app-card:hover {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.7); /* 悬停时稍微提高透明度 */
     border-color: #bbb;
     transform: translateY(-3px);
     transition: all 0.3s ease;
@@ -122,8 +124,11 @@ body {
 @media (max-width: 768px) {
     .app-card {
         min-width: 140px;
-        font-size: 0.9em;
         width: calc(33.333% - 13.33px);
+    }
+    
+    .app-card h2 {
+        font-size: 1.3em; /* 手机端文字稍小，但仍保持放大效果 */
     }
     
     .container {
