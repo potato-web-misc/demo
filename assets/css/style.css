@@ -1,19 +1,30 @@
 /* 通用基础样式 */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    padding: 20px;
-    background-color: #f0f0f0;
+    padding: 0;
+    /* 创建星空背景 */
+    background: #0d0d26; /* 深蓝色作为背景色 */
+    background-image: radial-gradient(circle at top left, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.2) 60%),
+                      radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.2) 60%);
+    color: #e0e0e0; /* 字体颜色改为浅色，以适应深色背景 */
     text-align: center;
+    min-height: 100vh; /* 确保背景覆盖整个视口 */
+    display: flex; /* 使用 flexbox 布局来居中内容 */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .header {
-    margin-bottom: 40px;
+    margin: 40px 0 60px;
 }
 
 .header h1 {
-    font-size: 2em;
-    color: #333;
+    font-size: 2.5em;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    letter-spacing: 2px; /* 增加文字间距 */
 }
 
 /* Flexbox 布局容器 */
@@ -21,8 +32,9 @@ body {
     display: flex;
     flex-wrap: wrap; /* 允许项目换行 */
     justify-content: center; /* 水平居中 */
-    gap: 20px; /* 项目间距 */
-    padding: 0 10px;
+    gap: 30px; /* 增加项目间距 */
+    max-width: 1000px; /* 限制容器最大宽度 */
+    width: 90%;
 }
 
 /* 应用卡片样式 */
@@ -30,40 +42,50 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 200px; /* 默认宽度 */
-    height: 150px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-decoration: none; /* 去除下划线 */
-    color: #555;
-    transition: transform 0.2s, box-shadow 0.2s; /* 鼠标悬停动画 */
+    flex-basis: calc(33.333% - 20px); /* 让卡片在大屏幕上每行显示三个 */
+    min-width: 250px; /* 确保每个卡片有最小宽度 */
+    height: 180px;
+    background-color: rgba(255, 255, 255, 0.1); /* 半透明背景 */
+    backdrop-filter: blur(5px); /* 毛玻璃效果 */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    color: #fff;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
 }
 
 .app-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px) scale(1.05); /* 提升并放大效果 */
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
 }
 
 .app-card h2 {
-    font-size: 1.2em;
+    font-size: 1.5em;
     margin: 0;
+    text-shadow: 0 0 5px #000;
 }
 
 /* 媒体查询 - 手机端 */
 @media (max-width: 768px) {
-    .header h1 {
-        font-size: 1.5em;
+    .header {
+        margin: 20px 0 40px;
     }
-    
-    .app-card {
-        width: 100%; /* 手机端卡片宽度占满一行 */
-        height: 120px;
+
+    .header h1 {
+        font-size: 2em;
     }
     
     .container {
         flex-direction: column; /* 手机端改为垂直排列 */
-        gap: 15px;
+        align-items: center; /* 确保卡片居中 */
+        gap: 20px;
+    }
+
+    .app-card {
+        flex-basis: 90%; /* 手机端卡片宽度占满大部分空间 */
+        min-width: unset; /* 取消最小宽度限制 */
+        height: 150px;
     }
 }
