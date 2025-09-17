@@ -3,8 +3,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    /* 创建星空背景 */
-    background: #0d0d26; /* 深蓝色作为基础背景色 */
+    background: #0d0d26; 
     color: #e0e0e0;
     text-align: center;
     min-height: 100vh;
@@ -12,8 +11,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative; /* 必须给 body 设置定位，让伪元素基于它定位 */
-    overflow: hidden; /* 防止星星超出页面范围时出现滚动条 */
+    position: relative;
+    overflow: hidden;
 }
 
 /* 定义星星的闪烁动画 */
@@ -90,27 +89,26 @@ body {
     letter-spacing: 2px;
 }
 
-/* Flexbox 布局容器 */
+/* Grid 布局容器 */
 .container {
-    display: flex;
-    flex-wrap: wrap; /* 允许项目换行 */
-    justify-content: center; /* 水平居中 */
-    gap: 30px; /* 增加项目间距 */
-    max-width: 1000px; /* 限制容器最大宽度 */
+    display: grid;
+    /* 在大屏幕上，每行显示2个卡片 */
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    gap: 30px; 
+    max-width: 1000px;
     width: 90%;
     z-index: 10;
     position: relative;
+    justify-items: center; /* 确保项目在网格单元格中居中 */
 }
 
 /* 应用卡片样式 */
-/* 桌面端 - 2排3列 */
 .app-card {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-basis: calc(33.333% - 20px); /* 每行3个 */
-    min-width: unset; /* 取消最小宽度限制，保证每行3个 */
-    height: 200px; /* 可调，保证整体美观 */
+    width: 100%; /* 确保卡片填满网格单元格 */
+    height: 180px;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -120,7 +118,6 @@ body {
     color: #fff;
     transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
 }
-
 
 .app-card:hover {
     transform: translateY(-8px) scale(1.05);
@@ -135,7 +132,7 @@ body {
 }
 
 /* 媒体查询 - 手机端 */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .header {
         margin: 20px 0 40px;
     }
@@ -145,14 +142,12 @@ body {
     }
     
     .container {
-        justify-content: center;
-        gap: 10px; /* 缩小间距，让卡片有更多空间 */
+        /* 在手机端，每行也显示2个卡片 */
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+        gap: 15px; /* 调整手机端间距 */
     }
 
     .app-card {
-        /* 手机端也保持每行 3 个卡片 */
-        flex-basis: calc(33.333% - 6.66px); /* 重新计算宽度以适应更小的间距 */
-        min-width: unset; /* 取消最小宽度限制，让其自适应 */
-        height: 100px; /* 进一步调整高度以适应小屏幕 */
+        height: 120px; /* 调整高度以适应小屏幕 */
     }
 }
