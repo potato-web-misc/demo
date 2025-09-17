@@ -1,19 +1,19 @@
 /* 基础样式：页面占满视口，垂直分布内容 */
 body {
     margin: 0;
-    padding: 20px; /* 增加页面边缘留白，与卡片间距协调 */
+    padding: 20px;
     box-sizing: border-box;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-x: hidden; /* 防止小屏幕横向滚动时body跟随滚动 */
+    overflow-x: hidden;
 }
 
-/* 标题样式：固定顶部，不随卡片滚动 */
+/* 标题样式：固定顶部 */
 .header {
     text-align: center;
-    margin-bottom: 25px; /* 增加标题与卡片容器的距离 */
+    margin-bottom: 20px;
     width: 100%;
     max-width: 1200px;
 }
@@ -24,27 +24,27 @@ body {
     color: #333;
 }
 
-/* 容器核心样式：统一且更大的间距，保持2排3列 */
+/* 容器核心样式：水平和竖直间距完全一致 */
 .container {
     display: flex;
-    flex-wrap: wrap; /* 强制换行，6个卡片分2行 */
-    gap: 25px; /* 关键：统一设置水平和竖直间距为25px（比之前更大） */
-    /* 宽度计算：3个卡片+2个水平间距（25px×2） */
-    width: calc( (100vw - 40px) / 3 * 3 + 50px ); /* 40px=body左右padding总和，50px=2个水平间距总和 */
+    flex-wrap: wrap;
+    gap: 20px; /* 关键：水平和竖直间距统一设为20px */
+    /* 宽度计算：3个卡片+2个水平间距(20px×2) */
+    width: calc( (100vw - 40px) / 3 * 3 + 40px ); /* 40px=2个水平间距总和 */
     max-width: 1200px;
     justify-content: center;
-    /* 垂直高度：2个卡片高度+1个竖直间距（25px） */
-    min-height: calc( 40vh * 2 + 25px );
-    overflow-x: auto; /* 小屏幕横向滚动 */
+    /* 垂直高度：2个卡片高度+1个竖直间距(20px) */
+    min-height: calc( 40vh * 2 + 20px );
+    overflow-x: auto;
     scrollbar-width: thin;
     scrollbar-color: #ccc transparent;
 }
 
-/* 卡片核心样式：保持40%视口高度，适配新间距 */
+/* 卡片样式：保持40%视口高度，适配间距 */
 .app-card {
     /* 宽度：容器均分3列，减去水平间距影响 */
-    width: calc( (100% - 50px) / 3 ); /* 50px=2个水平间距总和（25px×2） */
-    height: 40vh; /* 保持视口高度的40% */
+    width: calc( (100% - 40px) / 3 ); /* 40px=2个水平间距总和 */
+    height: 40vh;
     min-height: 120px;
     max-height: 250px;
     background-color: #f5f5f5;
@@ -69,7 +69,7 @@ body {
     border-color: #bbb;
 }
 
-/* 优化滚动条 */
+/* 滚动条优化 */
 .container::-webkit-scrollbar {
     height: 6px;
 }
