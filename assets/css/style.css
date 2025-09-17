@@ -104,7 +104,7 @@ button:hover {
 /* 核心修改：使用固定的3列网格布局 */
 .meals-container {
   display: grid;
-  /* 明确定义3列，每列宽度相等 */
+  /* 明确定义3列，每列宽度相等，这是关键 */
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
@@ -278,6 +278,7 @@ button:hover {
   display: none;
 }
 
+/* 媒体查询 - 手机端 */
 @media (max-width: 600px) {
   .search-container {
     flex-direction: column;
