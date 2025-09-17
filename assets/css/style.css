@@ -1,4 +1,4 @@
-/* 基础样式：让页面占满视口，内容垂直分布 */
+/* 基础样式：页面占满视口，垂直分布内容 */
 body {
     margin: 0;
     padding: 15px;
@@ -7,16 +7,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* 小屏幕横向滚动时，body不跟随滚动 */
-    overflow-x: hidden;
+    overflow-x: hidden; /* 防止小屏幕横向滚动时body跟随滚动 */
 }
 
-/* 标题样式：固定位置，不随卡片滚动 */
+/* 标题样式：固定顶部，不随卡片滚动 */
 .header {
     text-align: center;
     margin-bottom: 15px;
     width: 100%;
-    max-width: 1200px; /* 和容器最大宽度一致，视觉对齐 */
+    max-width: 1200px; /* 与容器最大宽度对齐，视觉统一 */
 }
 
 .header h1 {
@@ -25,31 +24,30 @@ body {
     color: #333;
 }
 
-/* 容器核心样式：控制2排3列，小屏幕允许横向滚动 */
+/* 容器核心样式：保持2排3列，适配卡片高度 */
 .container {
     display: flex;
-    flex-wrap: wrap; /* 强制换行，确保6个卡片分2行 */
-    gap: 15px; /* 卡片间距，小屏幕不缩小太多 */
-    /* 关键：宽度固定为“3个卡片+2个间距”的总和，确保每行只放3个 */
-    width: calc( (100vw - 30px) / 3 * 3 + 30px ); /* 100vw=视口宽度，30px=左右padding总和，30px=2个间距总和 */
-    max-width: 1200px; /* 大屏限制最大宽度，避免卡片过宽 */
-    flex: 1; /* 垂直方向占据页面大半个高度 */
+    flex-wrap: wrap; /* 强制换行，6个卡片分2行 */
+    gap: 15px; /* 卡片间距（水平+垂直） */
+    /* 宽度固定：3个卡片+2个水平间距，确保每行3个 */
+    width: calc( (100vw - 30px) / 3 * 3 + 30px ); /* 100vw=视口宽，30px=body左右padding总和 */
+    max-width: 1200px; /* 大屏限制宽度，避免卡片过宽 */
     justify-content: center;
-    align-content: center; /* 卡片在容器内垂直居中，视觉更饱满 */
-    /* 小屏幕宽度超限时，允许横向滚动 */
-    overflow-x: auto;
-    /* 去掉滚动条样式（可选，优化视觉） */
+    /* 垂直方向留足空间：2个卡片高度+1个垂直间距，避免溢出 */
+    min-height: calc( 40vh * 2 + 15px ); /* 40vh=单卡片高，15px=垂直间距 */
+    overflow-x: auto; /* 小屏幕横向滚动 */
     scrollbar-width: thin;
     scrollbar-color: #ccc transparent;
 }
 
-/* 卡片样式：确保3列均分，高度适配垂直空间 */
+/* 卡片核心样式：高度=视口40%，保持3列 */
 .app-card {
-    /* 宽度：容器宽度的1/3，减去间距的影响 */
-    width: calc( (100% - 30px) / 3 ); /* 30px=2个间距总和 */
-    /* 高度：容器高度的1/2，减去间距，确保2排占满容器 */
-    height: calc( (100% - 15px) / 2 ); /* 15px=1个间距（上下2排之间） */
-    min-height: 120px; /* 小屏幕最小高度，避免卡片过矮 */
+    /* 宽度：容器均分3列，减去水平间距影响 */
+    width: calc( (100% - 30px) / 3 ); /* 30px=2个水平间距总和 */
+    /* 高度：固定为视口高度的40% */
+    height: 40vh;
+    min-height: 120px; /* 小屏幕最低高度，避免过矮 */
+    max-height: 250px; /* 大屏最高高度，避免过高 */
     background-color: #f5f5f5;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -60,20 +58,19 @@ body {
     color: #333;
     font-size: 1.1em;
     font-weight: 600;
-    box-sizing: border-box; /* 确保边框/内边距不影响宽高计算 */
-    /* 防止文字溢出卡片 */
-    word-break: keep-all;
+    box-sizing: border-box;
     padding: 10px;
     text-align: center;
+    word-break: keep-all; /* 防止文字溢出 */
 }
 
-/* 悬停效果：保留基础交互反馈 */
+/* 悬停交互反馈 */
 .app-card:hover {
     background-color: #eee;
     border-color: #bbb;
 }
 
-/* 优化横向滚动体验（可选） */
+/* 优化滚动条（可选） */
 .container::-webkit-scrollbar {
     height: 6px;
 }
