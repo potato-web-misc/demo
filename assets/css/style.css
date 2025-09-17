@@ -1,153 +1,304 @@
-/* 通用基础样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Color Palette */
+:root {
+  --primary: #ff7e5f;
+  --primary-dark: #eb5e41;
+  --primary-light: #ffb199;
+  --secondary: #0ba360;
+  --text-dark: #333333;
+  --text-light: #f8f9fa;
+  --background: #ffffff;
+  --background-light: #f8f9fa;
+  --card-bg: #ffffff;
+  --border-radius: 8px;
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #0d0d26; 
-    color: #e0e0e0;
-    text-align: center;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+  font-family: sans-serif;
+  background-color: var(--background-light);
+  color: var(--text-dark);
+  line-height: 1.6;
 }
 
-/* 定义星星的闪烁动画 */
-@keyframes twinkling {
-    0% { opacity: 0; transform: scale(0.5); }
-    50% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0.5); }
-}
-
-/* 创建第一层星星（小点，密集） */
-.stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(circle, #fff 1px, transparent 1px),
-                      radial-gradient(circle, #fff 1px, transparent 1px),
-                      radial-gradient(circle, #fff 1px, transparent 1px);
-    background-size: 50px 50px, 70px 70px, 90px 90px;
-    background-position: 0 0, 20px 20px, 40px 40px;
-    opacity: 0.5;
-    animation: twinkling 20s infinite;
-    pointer-events: none;
-}
-
-/* 这是一个更简单的星光实现，如果你不需要大量星星，可以只保留这部分 */
-.star-1 {
-    position: absolute;
-    top: 10%;
-    left: 20%;
-    width: 2px;
-    height: 2px;
-    background-color: #fff;
-    box-shadow: 0 0 10px #fff;
-    animation: twinkling 5s infinite;
-    pointer-events: none;
-}
-
-.star-2 {
-    position: absolute;
-    top: 50%;
-    left: 80%;
-    width: 3px;
-    height: 3px;
-    background-color: #fff;
-    box-shadow: 0 0 10px #fff;
-    animation: twinkling 7s infinite 1s;
-    pointer-events: none;
-}
-
-.star-3 {
-    position: absolute;
-    top: 90%;
-    left: 40%;
-    width: 1.5px;
-    height: 1.5px;
-    background-color: #fff;
-    box-shadow: 0 0 10px #fff;
-    animation: twinkling 6s infinite 2s;
-    pointer-events: none;
-}
-
-.header {
-    margin: 40px 0 60px;
-    z-index: 10;
-    position: relative;
-}
-
-.header h1 {
-    font-size: 2.5em;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    letter-spacing: 2px;
-}
-
-/* Grid 布局容器 */
 .container {
-    display: grid;
-    /* 在大屏幕上，每行显示2个卡片 */
-    grid-template-columns: repeat(2, minmax(250px, 1fr));
-    gap: 30px; 
-    max-width: 1000px;
-    width: 90%;
-    z-index: 10;
-    position: relative;
-    justify-items: center; /* 确保项目在网格单元格中居中 */
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
-/* 应用卡片样式 */
-.app-card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%; /* 确保卡片填满网格单元格 */
-    height: 180px;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    text-decoration: none;
-    color: #fff;
-    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+header {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
-.app-card:hover {
-    transform: translateY(-8px) scale(1.05);
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+h1 {
+  font-size: 2.2rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
 }
 
-.app-card h2 {
-    font-size: 1.5em;
-    margin: 0;
-    text-shadow: 0 0 5px #000;
+h1 i {
+  margin-right: 10px;
 }
 
-/* 媒体查询 - 手机端 */
+header p {
+  color: var(--text-dark);
+  opacity: 0.7;
+}
+
+.search-container {
+  display: flex;
+  margin-bottom: 2rem;
+  gap: 10px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px 16px;
+  font-size: 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #ddd;
+  background-color: var(--background);
+  color: var(--text-dark);
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: var(--primary);
+}
+
+button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+button:hover {
+  background-color: var(--primary-dark);
+}
+
+#result-heading {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  color: var(--text-dark);
+}
+
+/* 核心修改：使用固定的3列网格布局 */
+.meals-container {
+  display: grid;
+  /* 明确定义3列，每列宽度相等 */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.meal {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+}
+
+.meal:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.meal img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.meal-info {
+  padding: 1rem;
+}
+
+.meal-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+.meal-category {
+  display: inline-block;
+  background-color: var(--primary-light);
+  color: var(--text-dark);
+  padding: 3px 8px;
+  font-size: 0.8rem;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+#meal-details {
+  background-color: var(--background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+#back-btn {
+  margin-bottom: 1.5rem;
+  background-color: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  padding: 8px 16px;
+}
+
+#back-btn:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+.meal-details-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.meal-details-img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: var(--border-radius);
+  margin-bottom: 1.5rem;
+}
+
+.meal-details-title {
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.meal-details-category {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.meal-details-category span {
+  background-color: var(--primary-light);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.meal-details-instructions {
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.meal-details-instructions h3 {
+  margin-bottom: 0.5rem;
+}
+
+.ingredients-list {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.ingredients-list li {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  background-color: var(--background-light);
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+}
+
+.ingredients-list li i {
+  color: var(--secondary);
+  margin-right: 8px;
+}
+
+.youtube-link {
+  display: inline-block;
+  background-color: #ff0000;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.youtube-link i {
+  margin-right: 8px;
+}
+
+#error-container {
+  background-color: rgba(255, 126, 95, 0.1);
+  border: 1px solid var(--primary);
+  color: var(--primary-dark);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.api-link {
+  text-align: center;
+  padding-bottom: 1.5rem;
+  color: var(--text-dark);
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.api-link a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.hidden {
+  display: none;
+}
+
 @media (max-width: 600px) {
-    .header {
-        margin: 20px 0 40px;
-    }
+  .search-container {
+    flex-direction: column;
+  }
 
-    .header h1 {
-        font-size: 2em;
-    }
-    
-    .container {
-        /* 在手机端，每行也显示2个卡片 */
-        grid-template-columns: repeat(2, minmax(120px, 1fr));
-        gap: 15px; /* 调整手机端间距 */
-    }
+  button#search-btn {
+    width: 100%;
+    padding: 10px;
+  }
 
-    .app-card {
-        height: 120px; /* 调整高度以适应小屏幕 */
-    }
+  /* 手机端也固定为3列，但调整了间距以适应小屏幕 */
+  .meals-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .meal-details-img {
+    max-width: 100%;
+  }
+
+  .ingredients-list {
+    grid-template-columns: 1fr;
+  }
 }
