@@ -93,10 +93,10 @@ body {
 /* Flexbox 布局容器 */
 .container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    max-width: 1000px;
+    flex-wrap: wrap; /* 允许项目换行 */
+    justify-content: center; /* 水平居中 */
+    gap: 30px; /* 增加项目间距 */
+    max-width: 1000px; /* 限制容器最大宽度 */
     width: 90%;
     z-index: 10;
     position: relative;
@@ -107,8 +107,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-basis: calc(33.333% - 20px);
-    min-width: 250px;
+    /* PC端每行3个，flex-basis的计算方式 */
+    flex-basis: calc(33.333% - 20px); 
+    min-width: 250px; 
     height: 180px;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
@@ -143,14 +144,16 @@ body {
     }
     
     .container {
-        flex-direction: column;
-        align-items: center;
+        /* 在手机端依旧保持水平排列，不修改 flex-direction */
+        /* flex-direction: column;  这一行已移除 */
+        align-items: center; 
         gap: 20px;
     }
 
     .app-card {
-        flex-basis: 90%;
-        min-width: unset;
-        height: 150px;
+        /* 在手机端每行显示3个，计算宽度 */
+        flex-basis: calc(33.333% - 13.33px); /* 3个卡片，2个间距(gap) */
+        min-width: unset; 
+        height: 120px; /* 调整高度以适应小屏幕 */
     }
 }
