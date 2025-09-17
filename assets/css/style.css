@@ -1,8 +1,7 @@
-/* 基础样式重置 */
+/* 基础样式 */
 body {
     margin: 0;
     padding: 20px;
-    min-height: 100vh;
     box-sizing: border-box;
 }
 
@@ -12,33 +11,40 @@ body {
     margin-bottom: 30px;
 }
 
-/* 容器使用flex布局实现3排2列 */
+/* 容器样式 - 关键是控制最大宽度让每行只能放2个 */
 .container {
     display: flex;
-    flex-wrap: wrap; /* 允许换行 */
-    justify-content: center; /* 水平居中 */
-    gap: 20px; /* 卡片之间的间距 */
-    max-width: 800px; /* 限制最大宽度 */
+    flex-wrap: wrap;
+    gap: 20px;
+    /* 控制容器最大宽度，确保每行只能容纳2个卡片 */
+    max-width: 800px;
     margin: 0 auto; /* 容器居中 */
 }
 
-/* 应用卡片样式 - 2列布局 */
+/* 卡片样式 - 确保每行2个 */
 .app-card {
-    /* 计算宽度：100%除以2列，减去间距的一半 */
-    flex-basis: calc(50% - 10px);
-    height: 150px; /* 固定高度 */
-    background-color: #eee; /* 简单背景色 */
-    border: 1px solid #ccc; /* 边框 */
+    /* 宽度计算：50%减去间距的一半 */
+    width: calc(50% - 10px);
+    height: 150px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none; /* 去除链接下划线 */
-    color: #333; /* 文字颜色 */
-    font-size: 1.2em;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    box-sizing: border-box; /* 确保边框不影响宽度计算 */
 }
 
-/* 悬停效果（保留基本交互反馈） */
+/* 悬停效果 */
 .app-card:hover {
-    background-color: #ddd;
+    background-color: #e0e0e0;
 }
-    
+
+/* 确保在小屏幕上不会挤压 */
+@media (max-width: 600px) {
+    .app-card {
+        width: 100%; /* 小屏幕上每行1个 */
+    }
+}
