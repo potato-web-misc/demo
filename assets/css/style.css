@@ -1,7 +1,7 @@
 /* 基础样式：页面占满视口，垂直分布内容 */
 body {
     margin: 0;
-    padding: 15px;
+    padding: 20px; /* 增加页面边缘留白，与卡片间距协调 */
     box-sizing: border-box;
     min-height: 100vh;
     display: flex;
@@ -13,9 +13,9 @@ body {
 /* 标题样式：固定顶部，不随卡片滚动 */
 .header {
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 25px; /* 增加标题与卡片容器的距离 */
     width: 100%;
-    max-width: 1200px; /* 与容器最大宽度对齐，视觉统一 */
+    max-width: 1200px;
 }
 
 .header h1 {
@@ -24,30 +24,29 @@ body {
     color: #333;
 }
 
-/* 容器核心样式：保持2排3列，适配卡片高度 */
+/* 容器核心样式：统一且更大的间距，保持2排3列 */
 .container {
     display: flex;
     flex-wrap: wrap; /* 强制换行，6个卡片分2行 */
-    gap: 15px; /* 卡片间距（水平+垂直） */
-    /* 宽度固定：3个卡片+2个水平间距，确保每行3个 */
-    width: calc( (100vw - 30px) / 3 * 3 + 30px ); /* 100vw=视口宽，30px=body左右padding总和 */
-    max-width: 1200px; /* 大屏限制宽度，避免卡片过宽 */
+    gap: 25px; /* 关键：统一设置水平和竖直间距为25px（比之前更大） */
+    /* 宽度计算：3个卡片+2个水平间距（25px×2） */
+    width: calc( (100vw - 40px) / 3 * 3 + 50px ); /* 40px=body左右padding总和，50px=2个水平间距总和 */
+    max-width: 1200px;
     justify-content: center;
-    /* 垂直方向留足空间：2个卡片高度+1个垂直间距，避免溢出 */
-    min-height: calc( 40vh * 2 + 15px ); /* 40vh=单卡片高，15px=垂直间距 */
+    /* 垂直高度：2个卡片高度+1个竖直间距（25px） */
+    min-height: calc( 40vh * 2 + 25px );
     overflow-x: auto; /* 小屏幕横向滚动 */
     scrollbar-width: thin;
     scrollbar-color: #ccc transparent;
 }
 
-/* 卡片核心样式：高度=视口40%，保持3列 */
+/* 卡片核心样式：保持40%视口高度，适配新间距 */
 .app-card {
     /* 宽度：容器均分3列，减去水平间距影响 */
-    width: calc( (100% - 30px) / 3 ); /* 30px=2个水平间距总和 */
-    /* 高度：固定为视口高度的40% */
-    height: 40vh;
-    min-height: 120px; /* 小屏幕最低高度，避免过矮 */
-    max-height: 250px; /* 大屏最高高度，避免过高 */
+    width: calc( (100% - 50px) / 3 ); /* 50px=2个水平间距总和（25px×2） */
+    height: 40vh; /* 保持视口高度的40% */
+    min-height: 120px;
+    max-height: 250px;
     background-color: #f5f5f5;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -61,7 +60,7 @@ body {
     box-sizing: border-box;
     padding: 10px;
     text-align: center;
-    word-break: keep-all; /* 防止文字溢出 */
+    word-break: keep-all;
 }
 
 /* 悬停交互反馈 */
@@ -70,7 +69,7 @@ body {
     border-color: #bbb;
 }
 
-/* 优化滚动条（可选） */
+/* 优化滚动条 */
 .container::-webkit-scrollbar {
     height: 6px;
 }
