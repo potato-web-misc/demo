@@ -40,7 +40,7 @@ body {
     pointer-events: none;
 }
 
-/* 这是一个更简单的星光实现，如果你不需要大量星星，可以只保留这部分 */
+/* 简单星光实现 */
 .star-1 {
     position: absolute;
     top: 10%;
@@ -102,15 +102,15 @@ body {
     position: relative;
 }
 
-/* 应用卡片样式 */
+/* 应用卡片样式 - 桌面端2排3列 */
 .app-card {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* PC端每行3个，flex-basis的计算方式 */
+    /* 每行3个卡片 */
     flex-basis: calc(33.333% - 20px); 
-    min-width: 250px; 
-    height: 180px;
+    min-width: unset; 
+    height: 200px; /* 调整高度适合2排布局 */
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -144,15 +144,14 @@ body {
     }
     
     .container {
-        /* 在手机端同样保持 flexbox 布局和间距 */
         justify-content: center;
         gap: 20px;
     }
 
     .app-card {
-        /* 手机端也保持每行 3 个卡片 */
+        /* 手机端自适应，每行3个或根据屏幕自动换行 */
         flex-basis: calc(33.333% - 13.33px);
-        min-width: unset; /* 取消最小宽度限制，让其自适应 */
-        height: 120px; /* 调整高度以适应小屏幕 */
+        min-width: unset;
+        height: 120px;
     }
 }
