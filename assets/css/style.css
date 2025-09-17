@@ -4,23 +4,6 @@ body {
     margin: 0;
     padding: 0;
     /* 创建星空背景 */
-    background: #0d0d26; /* 深蓝色作为背景色 */
-    background-image: radial-gradient(circle at top left, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.2) 60%),
-                      radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.2) 60%);
-    color: #e0e0e0; /* 字体颜色改为浅色，以适应深色背景 */
-    text-align: center;
-    min-height: 100vh; /* 确保背景覆盖整个视口 */
-    display: flex; /* 使用 flexbox 布局来居中内容 */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-/* 通用基础样式 */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    /* 创建星空背景 */
     background: #0d0d26; /* 深蓝色作为基础背景色 */
     color: #e0e0e0;
     text-align: center;
