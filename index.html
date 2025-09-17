@@ -5,39 +5,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>计科2301张三的 Web 应用展示</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- 引入Three.js库 -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/loaders/ObjectLoader.js"></script>
 </head>
 <body>
+    <!-- 动态场景容器 -->
+    <div id="scene-container"></div>
+    
+    <!-- 页面内容 -->
     <header class="header">
         <h1>计科2301张三成品展示</h1>
     </header>
 
     <main class="container">
-        <!-- quiz-game：图片为 quiz-game.jpg -->
         <a href="quiz-game/index.html" class="app-card">
-            <img src="assets/images/quiz-game.jpg"  class="app-image">
+            <img src="assets/images/quiz-game.jpg" alt="quiz-game应用图片" class="app-image">
             <h2>quiz-game</h2>
         </a>
-        <!-- todo-app：图片为 todo-app.jpg -->
         <a href="todo-app/index.html" class="app-card">
-            <img src="assets/images/todo-app.jpg"  class="app-image">
+            <img src="assets/images/todo-app.jpg" alt="todo-app应用图片" class="app-image">
             <h2>todo-app</h2>
         </a>
-        <!-- form-validator：图片为 form-validator.jpg -->
         <a href="form-validator/index.html" class="app-card">
-            <img src="assets/images/form-validator.jpg"  class="app-image">
+            <img src="assets/images/form-validator.jpg" alt="form-validator应用图片" class="app-image">
             <h2>form-validator</h2>
         </a>
-        <!-- password-generator：图片为 password-generator.jpg -->
         <a href="password-generator/index.html" class="app-card">
-            <img src="assets/images/password-generator.jpg"  class="app-image">
+            <img src="assets/images/password-generator.jpg" alt="password-generator应用图片" class="app-image">
             <h2>password-generator</h2>
         </a>
-        <!-- recipe-finder：图片为 recipe-finder.jpg -->
         <a href="recipe-finder/index.html" class="app-card">
-            <img src="assets/images/recipe-finder.jpg"  class="app-image">
+            <img src="assets/images/recipe-finder.jpg" alt="recipe-finder应用图片" class="app-image">
             <h2>recipe-finder</h2>
         </a>
     </main>
+
+    <script>
+        // 初始化场景
+        let scene, camera, renderer, clock;
+        
+        function initScene() {
+            // 创建场景
+            scene = new THREE.Scene();
+            
+            // 创建相机
+            camera = new THREE.PerspectiveCamera(
+                75, 
+                window.innerWidth / window.innerHeight, 
+                0.1, 
+                1000
+            );
+            camera.position.z = 5;
+            
+            // 创建渲染器
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0); // 透明背景
+            
+            // 将渲染器添加到页面
+            const container = document.getElementById('scene-container');
+            container.appendChild(renderer.domElement);
+            
+            // 添加环境光
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            // 添加方向光
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(5, 5, 5);
+            scene.add(directionalLight);
+            
+            // 加载场景配置
+            const objectLoader = new THREE.ObjectLoader();
+            
+            // 先加载project.json配置
+            fetch('assets/project.json')
+                .then(response => response.json())
+                .then(config => {
+                    // 应用配置中的相机位置
+                    if (config.camera) {
+                        camera.position.set(
+                            config.camera.x || 0,
+                            config.camera.y || 0,
+                            config.camera.z || 5
+                        );
+                    }
+                    
+                    // 加载场景包
+                    objectLoader.load(
+                        'assets/scene.pkg',
+                        function(object) {
+                            scene.add(object);
+                            
+                            // 如果配置中有动画设置，可在此处实现
+                            if (config.animation) {
+                                // 处理动画逻辑
+                            }
+                        },
+                        function(xhr) {
+                            console.log((xhr.loaded / xhr.total * 100) + '% 已加载');
+                        },
+                        function(error) {
+                            console.error('加载场景时出错:', error);
+                            // 加载失败时使用预览图作为备选
+                            useFallbackBackground();
+                        }
+                    );
+                })
+                .catch(error => {
+                    console.error('加载配置文件时出错:', error);
+                    useFallbackBackground();
+                });
+            
+            // 时钟用于动画
+            clock = new THREE.Clock();
+            
+            // 窗口大小调整处理
+            window.addEventListener('resize', onWindowResize);
+            
+            // 开始渲染循环
+            animate();
+        }
+        
+        // 窗口大小调整
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        // 渲染循环
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // 可以在这里添加旋转或其他动画效果
+            scene.traverse(function(child) {
+                if (child.isMesh) {
+                    // 轻微旋转所有网格物体
+                    child.rotation.y += 0.001;
+                }
+            });
+            
+            renderer.render(scene, camera);
+        }
+        
+        // 加载失败时使用预览图作为备选
+        function useFallbackBackground() {
+            const container = document.getElementById('scene-container');
+            container.style.backgroundImage = "url('assets/preview.jpg')";
+            container.style.backgroundSize = "cover";
+            container.style.backgroundPosition = "center";
+        }
+        
+        // 页面加载完成后初始化场景
+        window.addEventListener('load', initScene);
+    </script>
 </body>
 </html>
     
