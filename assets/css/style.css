@@ -107,9 +107,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* 每行3个卡片 */
+    /* 每行3个卡片，计算方式：100%宽度除以3，减去间距的影响 */
     flex-basis: calc(33.333% - 20px); 
-    min-width: unset; 
+    min-width: 150px; /* 确保在小屏幕上也有合适的最小宽度 */
     height: 200px; /* 调整高度适合2排布局 */
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
@@ -133,6 +133,14 @@ body {
     text-shadow: 0 0 5px #000;
 }
 
+/* 媒体查询 - 平板设备 */
+@media (max-width: 900px) {
+    .app-card {
+        /* 平板上每行2个卡片 */
+        flex-basis: calc(50% - 15px);
+    }
+}
+
 /* 媒体查询 - 手机端 */
 @media (max-width: 768px) {
     .header {
@@ -149,9 +157,10 @@ body {
     }
 
     .app-card {
-        /* 手机端自适应，每行3个或根据屏幕自动换行 */
-        flex-basis: calc(33.333% - 13.33px);
-        min-width: unset;
+        /* 手机端每行1个卡片 */
+        flex-basis: 100%;
+        max-width: 300px;
         height: 120px;
     }
 }
+    
