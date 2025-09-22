@@ -38,12 +38,12 @@ body {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
-/* 容器核心样式：确保每行3个卡片 */
+/* 容器核心样式：确保PC端每行3个卡片 */
 .container {
     display: flex;
     flex-wrap: wrap;
     column-gap: 20px; /* 水平间距 */
-    row-gap: 10px;    /* 竖直间距 */
+    row-gap: 15px;    /* 竖直间距略增大，提升移动端体验 */
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -52,16 +52,15 @@ body {
     z-index: 10;
 }
 
-/* 应用卡片样式：半透明背景，确保每行3个 */
+/* 应用卡片样式：PC端三列布局 */
 .app-card {
-    /* 关键：计算宽度确保每行3个卡片 */
-    width: calc(33.333% - 13.33px);
-    min-width: 200px; /* 最小宽度，确保不会过窄 */
+    width: calc(33.333% - 13.33px); /* PC端三列 */
+    min-width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.6); /* 应用框半透明（0.6为透明度值） */
-    border: 1px solid rgba(255, 255, 255, 0.8); /* 边框也稍透明 */
+    background-color: rgba(255, 255, 255, 0.6); /* 应用框半透明 */
+    border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 8px;
     text-decoration: none;
     color: #333;
@@ -73,32 +72,32 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* 应用图片：确保完全不透明 */
+/* 应用图片：保持不透明 */
 .app-image {
     width: 100%;
-    height: 70%; /* 图片占卡片大部分高度 */
-    object-fit: contain; /* 保持图片完整，不变形，不裁剪 */
+    height: 70%;
+    object-fit: contain;
     margin-bottom: 15px;
-    background-color: #fff; /* 图片背景完全不透明 */
+    background-color: #fff;
     padding: 10px;
     box-sizing: border-box;
-    border: 1px solid #ddd; /* 给图片加边框，与半透明卡片区分 */
+    border: 1px solid #ddd;
 }
 
-/* 应用标题：文字放大 */
+/* 应用标题：放大文字 */
 .app-card h2 {
     margin: 0;
-    font-size: 1.5em; /* 文字放大（比原来的1.1em大） */
+    font-size: 1.5em;
     text-align: center;
     padding-top: 10px;
     border-top: 1px solid rgba(238, 238, 238, 0.8);
     width: 100%;
-    font-weight: 700; /* 加粗文字，更醒目 */
+    font-weight: 700;
 }
 
 /* 悬停交互效果 */
 .app-card:hover {
-    background-color: rgba(255, 255, 255, 0.7); /* 悬停时稍微提高透明度 */
+    background-color: rgba(255, 255, 255, 0.7);
     border-color: #bbb;
     transform: translateY(-3px);
     transition: all 0.3s ease;
@@ -114,33 +113,42 @@ body {
     border-radius: 3px;
 }
 
-/* 保持手机端与PC端布局一致 */
-@media (max-width: 900px) {
+/* 平板端适配：保持两列 */
+@media (max-width: 900px) and (min-width: 769px) {
     .app-card {
-        min-width: 160px;
+        width: calc(50% - 10px); /* 平板端两列 */
+        min-width: 180px;
     }
 }
 
+/* 手机端适配：转为单列布局 */
 @media (max-width: 768px) {
     .app-card {
-        min-width: 140px;
-        width: calc(33.333% - 13.33px);
+        width: 100%; /* 手机端单列，占满宽度 */
+        min-width: auto; /* 取消最小宽度限制 */
+        max-width: 400px; /* 限制最大宽度，避免过宽 */
+        height: 50vh; /* 适当降低高度，适应手机屏幕 */
+        min-height: 250px;
     }
     
     .app-card h2 {
-        font-size: 1.3em; /* 手机端文字稍小，但仍保持放大效果 */
+        font-size: 1.4em;
     }
     
     .container {
-        width: auto;
-        padding-bottom: 20px;
-        overflow-x: auto;
-        justify-content: flex-start;
-        padding-left: 10px;
+        width: 100%;
+        padding: 0; /* 取消左右内边距 */
+        overflow-x: visible; /* 取消横向滚动 */
+        justify-content: center; /* 卡片居中显示 */
+        gap: 15px; /* 统一间距 */
     }
     
     body {
-        padding: 10px;
+        padding: 15px;
+    }
+    
+    .header h1 {
+        font-size: 1.6em; /* 手机端标题稍小 */
     }
 }
     
